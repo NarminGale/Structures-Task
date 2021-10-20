@@ -1,6 +1,13 @@
 import React from 'react'
 import {
   TreeList,
+  HeaderFilter,
+  Selection,
+  Sorting,
+  Paging,
+  Pager,
+  Scrolling,
+  SearchPanel,
   Editing,
   Column,
   ValidationRule,
@@ -11,6 +18,7 @@ import { tasks } from './data.js'
 import LocalStore from 'devextreme/data/local_store'
 
 const expandedRowKeys = [1]
+const allowedPageSizes = [3, 5, 7]
 
 const popupOptions = {
   title: 'Employee Info',
@@ -35,7 +43,7 @@ function App() {
       e.editorOptions.disabled = true
       e.editorOptions.value = null
     }
-    console.log(e.row.data.Task_Subject)
+    // console.log(e.row.data.Task_Subject)
   }
 
   const onInitNewRow = (e) => {
@@ -62,6 +70,17 @@ function App() {
           popup={popupOptions}
           mode="popup"
         />
+        <HeaderFilter visible={true} />
+        <Sorting mode="multiple" />
+        <Scrolling mode="standard" />
+        <Paging enabled={true} defaultPageSize={3} />
+        <Pager
+          showPageSizeSelector={true}
+          allowedPageSizes={allowedPageSizes}
+          showInfo={true}
+        />
+        <Selection mode="single" />
+        <SearchPanel visible={true} />
         <Column dataField="Task_Subject" caption="Task Name" width={300}>
           <ValidationRule type="required" />
         </Column>
