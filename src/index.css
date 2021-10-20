@@ -35,6 +35,8 @@
 
 #tree-list-demo {
   min-height: 530px;
+  max-width: 800px;
+  margin: 3rem auto;
 }
 
 #tree-list {
@@ -43,4 +45,13 @@
 
 #employees {
   max-height: 530px;
+}
+
+/* home page styling */
+.home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
 }
