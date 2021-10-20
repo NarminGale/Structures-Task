@@ -1,60 +1,85 @@
-import 'devextreme/dist/css/dx.common.css'
-import 'devextreme/dist/css/dx.light.css'
 import React from 'react'
-
-import { Template } from 'devextreme-react/core/template'
-import TreeList, {
+import {
+  TreeList,
+  Editing,
   Column,
-  ColumnChooser,
-  HeaderFilter,
-  SearchPanel,
-  Selection,
+  ValidationRule,
   Lookup,
+  Button,
 } from 'devextreme-react/tree-list'
-
 import { tasks } from './data.js'
-import EmployeeCell from './EmployeeCell.js'
+import LocalStore from 'devextreme/data/local_store'
 
-const expandedKeys = [1, 2]
-const selectedKeys = [1, 29, 42]
+const expandedRowKeys = [1]
 
-class App extends React.Component {
-  render() {
-    return (
+const popupOptions = {
+  title: 'Employee Info',
+  showTitle: true,
+  width: 700,
+}
+
+const store = new LocalStore({
+  key: 'id',
+  data: tasks,
+  name: 'myLocalData',
+})
+
+const lookupData = {
+  store: store,
+  sort: 'Full_Name',
+}
+
+function App() {
+  const onEditorPreparing = (e) => {
+    if (e.dataField === 'Head_ID' && e.row.data.ID === 1) {
+      e.editorOptions.disabled = true
+      e.editorOptions.value = null
+    }
+    console.log(e.row.data.Task_Subject)
+  }
+
+  const onInitNewRow = (e) => {
+    e.data.Head_ID = 1
+  }
+
+  return (
+    <div id="tree-list-demo">
       <TreeList
-        dataSource={dataSourceOptions}
-        showBorders={true}
+        dataSource={store._array}
         columnAutoWidth={true}
-        wordWrapEnabled={true}
-        defaultExpandedRowKeys={expandedKeys}
-        defaultSelectedRowKeys={selectedKeys}
+        showRowLines={true}
+        showBorders={true}
+        defaultExpandedRowKeys={expandedRowKeys}
         keyExpr="Task_ID"
         parentIdExpr="Task_Parent_ID"
-        id="tasks">
-        <SearchPanel visible={true} width={250} />
-        <HeaderFilter visible={true} />
-        <Selection mode="multiple" />
-
-        <Column dataField="Task_Subject" width={300} />
-
-        <Column dataField="Task_Status" caption="Status" minWidth={100}>
-          <Lookup dataSource={statuses} />
+        onEditorPreparing={onEditorPreparing}
+        onInitNewRow={onInitNewRow}
+        id="tree-list">
+        <Editing
+          allowUpdating={true}
+          allowDeleting={true}
+          allowAdding={true}
+          popup={popupOptions}
+          mode="popup"
+        />
+        <Column dataField="Task_Subject" caption="Task Name" width={300}>
+          <ValidationRule type="required" />
+        </Column>
+        <Column dataField="Task_Status" caption="Status" width={300}>
+          <ValidationRule type="required" />
         </Column>
 
-        <Template name="employeeTemplate" render={EmployeeCell} />
+        {/* <Column dataField="Task_Subject" caption="Parent Name">
+            <ValidationRule type="required" />
+          </Column> */}
+
+        <Column type="buttons" width={200}>
+          <Button name="delete" />
+          <Button name="edit" />
+        </Column>
       </TreeList>
-    )
-  }
+    </div>
+  )
 }
-
-const dataSourceOptions = {
-  store: tasks,
-}
-
-function customizeTaskCompletionText(cellInfo) {
-  return `${cellInfo.valueText}%`
-}
-
-const statuses = ['Active', 'Deactive']
 
 export default App
