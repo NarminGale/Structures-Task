@@ -1,22 +1,46 @@
-#tasks {
-  max-height: 540px;
+@font-face {
+  font-family: 'icomoon';
+  src: url('./fonts/icomoon.eot?fyey3b');
+  src: url('./fonts/icomoon.eot?fyey3b#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon.ttf?fyey3b') format('truetype'),
+    url('./fonts/icomoon.woff?fyey3b') format('woff'),
+    url('./fonts/icomoon.svg?fyey3b#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
-#tasks .dx-treelist-rowsview td {
-  vertical-align: middle;
+
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.img,
-.name {
-  display: inline-block;
-  vertical-align: middle;
+
+.icon-pencil:before {
+  content: '\e905';
 }
-.img {
-  height: 50px;
-  width: 50px;
-  margin-right: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border-radius: 25px;
-  border: 1px solid lightgray;
-  background-color: #fff;
+.icon-bin:before {
+  content: '\e9ac';
+}
+
+#tree-list-demo {
+  min-height: 530px;
+}
+
+#tree-list {
+  margin: 0 auto;
+}
+
+#employees {
+  max-height: 530px;
 }
