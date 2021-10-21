@@ -26,7 +26,7 @@ const allowedPageSizes = [3, 5, 7]
 const popupOptions = {
   title: 'Task Info',
   showTitle: true,
-  width: 200,
+  width: 700,
 }
 
 const store = new LocalStore({
