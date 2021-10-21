@@ -19,11 +19,20 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
+  color: #b2b2b2 !important;
+  /* line-height: 1; */
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bin:hover {
+  color: #c0392b !important;
+}
+
+.icon-pencil:hover {
+  color: #3498db !important;
 }
 
 .icon-pencil:before {
