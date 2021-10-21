@@ -10,10 +10,13 @@ import {
   SearchPanel,
   Editing,
   Column,
+  Popup,
+  Form,
   ValidationRule,
   Lookup,
   Button,
 } from 'devextreme-react/tree-list'
+import { Item } from 'devextreme-react/form'
 import { tasks } from './data.js'
 import LocalStore from 'devextreme/data/local_store'
 
@@ -23,7 +26,7 @@ const allowedPageSizes = [3, 5, 7]
 const popupOptions = {
   title: 'Task Info',
   showTitle: true,
-  width: 700,
+  width: 200,
 }
 
 const store = new LocalStore({
@@ -75,6 +78,7 @@ function App() {
           popup={popupOptions}
           mode="popup"
         />
+
         <HeaderFilter visible={true} />
         <Sorting mode="multiple" />
         <Scrolling mode="standard" />
@@ -86,16 +90,23 @@ function App() {
         />
         <Selection mode="single" />
         <SearchPanel visible={true} />
-        <Column dataField="Task_Subject" caption="Task Name" width={300}>
-          <ValidationRule type="required" />
-        </Column>
-        <Column dataField="Task_Status" caption="Status" width={300}>
+
+        <Column dataField="Task_Subject" caption="Task Name" width={260}>
           <ValidationRule type="required" />
         </Column>
 
-        {/* <Column dataField="Task_Subject" caption="Parent Name">
-            <ValidationRule type="required" />
-          </Column> */}
+        <Column visible={true} dataField="Task_Parent_ID" caption="Task Parent">
+          <Lookup
+            dataSource={lookupData}
+            valueExpr="Task_ID"
+            displayExpr="Task_Subject"
+          />
+          <ValidationRule type="required" />
+        </Column>
+
+        <Column dataField="Task_Status" caption="Status" width={140}>
+          <ValidationRule type="required" />
+        </Column>
 
         <Column type="buttons" width={200}>
           <Button cssClass="icon-bin" name="delete" />
