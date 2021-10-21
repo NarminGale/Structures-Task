@@ -91,6 +91,14 @@ function App() {
         <Selection mode="single" />
         <SearchPanel visible={true} />
 
+        <Column
+          visible={false}
+          dataField="Task_ID"
+          caption="Task ID"
+          width={100}>
+          <ValidationRule type="required" />
+        </Column>
+
         <Column dataField="Task_Subject" caption="Task Name" width={260}>
           <ValidationRule type="required" />
         </Column>
