@@ -21,7 +21,7 @@ const expandedRowKeys = [1]
 const allowedPageSizes = [3, 5, 7]
 
 const popupOptions = {
-  title: 'Employee Info',
+  title: 'Task Info',
   showTitle: true,
   width: 700,
 }
@@ -93,8 +93,8 @@ function App() {
           </Column> */}
 
         <Column type="buttons" width={200}>
-          <Button name="delete" />
-          <Button name="edit" />
+          <Button cssClass="icon-bin" name="delete" />
+          <Button cssClass="icon-pencil" name="edit" />
         </Column>
       </TreeList>
     </div>
