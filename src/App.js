@@ -50,6 +50,10 @@ function App() {
     e.data.Head_ID = 1
   }
 
+  const onRowPrepared = (e) => {
+    e.rowElement.style.height = '24px'
+  }
+
   return (
     <div id="tree-list-demo">
       <TreeList
@@ -62,6 +66,7 @@ function App() {
         parentIdExpr="Task_Parent_ID"
         onEditorPreparing={onEditorPreparing}
         onInitNewRow={onInitNewRow}
+        onRowPrepared={onRowPrepared}
         id="tree-list">
         <Editing
           allowUpdating={true}
