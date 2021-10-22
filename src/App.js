@@ -20,12 +20,9 @@ import {
 import {
   Validator,
   RequiredRule,
-  CompareRule,
   NumericRule,
   PatternRule,
   StringLengthRule,
-  RangeRule,
-  AsyncRule,
 } from 'devextreme-react/validator'
 
 import { tasks } from './data.js'
@@ -126,8 +123,8 @@ function App() {
         <Column dataField="Task_Status" caption="Status" width={140}></Column>
 
         <Column type="buttons" width={200}>
-          <Button cssClass="icon-bin" name="delete" />
-          <Button cssClass="icon-pencil" name="edit" />
+          <Button cssClass="icon-pencil" name="edit" text="" />
+          <Button cssClass="icon-bin" name="delete" text="" />
         </Column>
       </TreeList>
     </div>
