@@ -12,6 +12,7 @@ import {
   Column,
   Lookup,
   Button,
+  StateStoring,
 } from 'devextreme-react/tree-list'
 
 import {
@@ -84,6 +85,11 @@ function App() {
         <Selection mode="single" />
         <SearchPanel visible={true} />
 
+        <StateStoring
+          enabled={true}
+          type="localStorage"
+          storageKey="treeListStorage"
+        />
         {/* Task Id Component Column*/}
         <Column
           visible={false}
