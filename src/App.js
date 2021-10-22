@@ -10,9 +10,6 @@ import {
   SearchPanel,
   Editing,
   Column,
-  Popup,
-  Form,
-  ValidationRule,
   Lookup,
   Button,
 } from 'devextreme-react/tree-list'
@@ -87,12 +84,14 @@ function App() {
         <Selection mode="single" />
         <SearchPanel visible={true} />
 
+        {/* Task Id Component Column*/}
         <Column
           visible={false}
           dataField="Task_ID"
           caption="Task ID"
           width={100}></Column>
 
+        {/* Task Name Component Column*/}
         <Column dataField="Task_Subject" caption="Task Name" width={260}>
           <Validator>
             <RequiredRule type="required" message="Task name is required" />
@@ -109,6 +108,7 @@ function App() {
           </Validator>
         </Column>
 
+        {/* Task Parent Name Component Column*/}
         <Column visible={true} dataField="Task_Parent_ID" caption="Task Parent">
           <Lookup
             dataSource={lookupData}
@@ -120,8 +120,10 @@ function App() {
           </Validator>
         </Column>
 
+        {/* Task Status Component Column*/}
         <Column dataField="Task_Status" caption="Status" width={140}></Column>
 
+        {/* Edit and Delete Buttons Components */}
         <Column type="buttons" width={200}>
           <Button cssClass="icon-pencil" name="edit" text="" />
           <Button cssClass="icon-bin" name="delete" text="" />
