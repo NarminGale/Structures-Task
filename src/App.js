@@ -16,27 +16,22 @@ import {
   Lookup,
   Button,
 } from 'devextreme-react/tree-list'
-import { Item } from 'devextreme-react/form'
-import { Switch } from 'devextreme-react/switch'
+
+import {
+  Validator,
+  RequiredRule,
+  CompareRule,
+  NumericRule,
+  PatternRule,
+  StringLengthRule,
+  RangeRule,
+  AsyncRule,
+} from 'devextreme-react/validator'
 
 import { tasks } from './data.js'
-import LocalStore from 'devextreme/data/local_store'
 
 const expandedRowKeys = [1]
 const allowedPageSizes = [5, 7, 9]
-
-const popupOptions = {
-  title: 'Task Info',
-  showTitle: true,
-  width: 700,
-  height: 525,
-}
-
-// const store = new LocalStore({
-//   key: 'id',
-//   data: tasks,
-//   name: 'myLocalData',
-// })
 
 const lookupData = {
   store: tasks,
@@ -44,6 +39,8 @@ const lookupData = {
 }
 
 function App() {
+  const namePattern = /^[^0-9]+$/
+
   const onEditorPreparing = (e) => {
     if (e.dataField === 'Task_Parent_ID' && e.row.data.Task_ID === 1) {
       e.editorOptions.disabled = true
@@ -53,6 +50,7 @@ function App() {
 
   const onInitNewRow = (e) => {
     e.data.Task_Parent_ID = 0
+    console.log(e.element)
   }
 
   const onRowPrepared = (e) => {
@@ -77,7 +75,6 @@ function App() {
           allowUpdating={true}
           allowDeleting={true}
           allowAdding={true}
-          // popup={popupOptions}
           mode="row"
         />
 
@@ -97,12 +94,22 @@ function App() {
           visible={false}
           dataField="Task_ID"
           caption="Task ID"
-          width={100}>
-          {/* <ValidationRule type="required" /> */}
-        </Column>
+          width={100}></Column>
 
         <Column dataField="Task_Subject" caption="Task Name" width={260}>
-          <ValidationRule type="required" />
+          <Validator>
+            <RequiredRule type="required" message="Task name is required" />
+            <PatternRule
+              ignoreEmptyValue={false}
+              message="Do not use digits in the Task Name"
+              pattern={namePattern}
+            />
+            <StringLengthRule
+              message="Task name must have at least 3 symbols"
+              min={3}
+              max={30}
+            />
+          </Validator>
         </Column>
 
         <Column visible={true} dataField="Task_Parent_ID" caption="Task Parent">
@@ -111,19 +118,18 @@ function App() {
             valueExpr="Task_ID"
             displayExpr="Task_Subject"
           />
-          <ValidationRule type="required" />
+          <Validator>
+            <NumericRule type="numeric" />
+          </Validator>
         </Column>
 
-        <Column dataField="Task_Status" caption="Status" width={140}>
-          <ValidationRule type="required" />
-        </Column>
+        <Column dataField="Task_Status" caption="Status" width={140}></Column>
 
         <Column type="buttons" width={200}>
           <Button cssClass="icon-bin" name="delete" />
           <Button cssClass="icon-pencil" name="edit" />
         </Column>
       </TreeList>
-      {/* <Switch defaultValue={true} /> */}
     </div>
   )
 }
