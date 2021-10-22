@@ -85,6 +85,7 @@ function App() {
         <Selection mode="single" />
         <SearchPanel visible={true} />
 
+        {/* Sort and filter data, reorder columns, select rows. Once you are done, refresh the web page to see that the grid’s state is automatically persisted to continue working from where you stopped*/}
         <StateStoring
           enabled={true}
           type="localStorage"
