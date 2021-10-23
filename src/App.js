@@ -110,6 +110,9 @@ function App() {
             <StringLengthRule
               message="Task name must have at least 3 symbols"
               min={3}
+            />
+            <StringLengthRule
+              message="Task name must have max 30 symbols"
               max={30}
             />
           </Validator>
